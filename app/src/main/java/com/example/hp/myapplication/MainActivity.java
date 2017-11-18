@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("code");
+        myRef = database.getReference("cod");
         sndButton=(Button)findViewById(R.id.sndButton);
         msgText= (EditText) findViewById(R.id.msgText);
         msgList=(ListView)findViewById(R.id.msgList);
