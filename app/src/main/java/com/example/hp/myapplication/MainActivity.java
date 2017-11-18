@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,6 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import static com.example.hp.myapplication.R.layout.custom_layout;
 
 public class MainActivity extends AppCompatActivity {
     DatabaseReference myRef;
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         myRef = database.getReference("cod");
         sndButton=(Button)findViewById(R.id.sndButton);
         msgText= (EditText) findViewById(R.id.msgText);
-        msgList=(ListView)findViewById(R.id.msgList);
+       msgList=(ListView)findViewById(R.id.msgList);
         sndButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,19 +50,21 @@ public class MainActivity extends AppCompatActivity {
 
         });
         final List<ChatMsg> messages =new LinkedList<>();
-        final ArrayAdapter <ChatMsg> adapter =new ArrayAdapter<ChatMsg> (
-                this,android.R.layout.two_line_list_item,messages
+       final ArrayAdapter <ChatMsg> adapter =new ArrayAdapter<ChatMsg> (
+                this,R.layout.custom_layout,messages
         )
         {
             @Override
             public View getView(int position,View view,ViewGroup parent)
             {
-                if(view==null){
-                    view=getLayoutInflater().inflate(android.R.layout.two_line_list_item,parent,false);
+                if(view==null) {
+
+                    view = getLayoutInflater().inflate(custom_layout,null);
                 }
                 ChatMsg chat=messages.get(position);
-                ((TextView)view.findViewById(android.R.id.text1)).setText(chat.getName());
-                ((TextView)view.findViewById(android.R.id.text2)).setText(chat.getMessage());
+                ((ImageView)view.findViewById(R.id.imageView)).setImageResource(R.drawable.vikas1);
+                ((TextView)view.findViewById(R.id.textView_name)).setText(chat.getName());
+                ((TextView)view.findViewById(R.id.textView_message)).setText(chat.getMessage());
                 return view;
             }
 
